@@ -1,0 +1,36 @@
+{% extends "courses/base.html" %}
+
+{% block content %}
+<h1>{{ course.title }}</h1>
+<p>{{ course.description }}</p>
+
+<div class="progress">
+    <div class="progress-bar" role="progressbar" style="width: {{ progress }}%" 
+         aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+        {{ progress|floatformat:0 }}% Complete
+    </div>
+</div>
+
+<h2>Lessons</h2>
+<ul class="list-group">
+    {% for lesson in course.lessons.all %}
+    <li class="list-group-item">
+        <h3>{{ lesson.title }}</h3>
+        <p>{{ lesson.content|truncatewords:30 }}</p>
+        {% if lesson in student.completed_lessons.all %}
+            <span class="badge badge-success">Completed</span>
+        {% else %}
+            <span class="badge badge-secondary">Not Completed</span>
+            <a href="{% url 'mark_lesson_complete' lesson.id %}" class="btn btn-sm btn-primary">
+                Mark Complete
+            </a>
+        {% endif %}
+        {% if lesson.video_url %}
+            <a href="{{ lesson.video_url }}" class="btn btn-sm btn-info" target="_blank">
+                Watch Video
+            </a>
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
