@@ -33,7 +33,8 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ['web-production-c32fb.up.railway.app']
-CSRF_TRUSTED_ORIGINS =['<https://web-production-c32fb.up.railway.app>']
+CSRF_TRUSTED_ORIGINS = ['https://web-production-c32fb.up.railway.app']
+
 
 
 # Application definition
